@@ -1,3 +1,5 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Consulta Créditos Clientes</title>
 <style>
 :root {
@@ -233,6 +235,21 @@ footer.page {
   .search-block { min-width: 0; }
   .refresh-block { align-items: stretch; }
   .refresh-status { text-align: left; max-width: none; }
+
+  /* En desktop la tabla se achica a 100% del ancho con columnas en % (ver
+     comentario junto a COL_WIDTHS) para que entre sin scroll horizontal —
+     en una pantalla angosta eso hace que CUIT, Crédito Otorgado/Disponible,
+     etc. no tengan lugar y el "…" corte el número a la mitad. Acá se deja
+     que la tabla mida lo que necesite (auto) y sea .table-scroll la que
+     scrollee horizontal — así ningún número queda cortado. */
+  table { table-layout: auto; width: auto; min-width: 100%; }
+  td.col-cuit, .mono, td.col-money {
+    overflow: visible; text-overflow: clip; white-space: nowrap;
+  }
+  /* Los encabezados pueden partirse en 2 líneas (ej. "Crédito Otorgado") en
+     vez de forzar nowrap — así el ancho de columna lo define el dato (el
+     número), no el título, y la tabla no se estira más de lo necesario. */
+  thead th { white-space: normal; overflow: visible; text-overflow: clip; }
 }
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
